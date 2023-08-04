@@ -10,6 +10,7 @@
     <string name="roll_once_button">Roll Once</string>
     <string name="roll_twice_button">Roll Twice</string>
     <string name="textview_result">Result: </string>
+    <string name="custom_sides_hints">Add a custom number of sides </string>
     <string-array name="custom_sides">
         <item>2</item>
         <item>14</item>

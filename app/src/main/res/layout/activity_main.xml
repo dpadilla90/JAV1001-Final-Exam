@@ -26,14 +26,15 @@
         <RadioButton android:id="@+id/radioCustom" style="@style/CustomRadioButtonStyle" android:text="@string/radio_custom" android:layout_width="wrap_content" android:layout_height="wrap_content" />
     </RadioGroup>
 
-    <Spinner
-        android:id="@+id/spinner"
-        style="@style/CustomSpinnerStyle"
-        android:layout_marginTop="20dp"
+    <EditText
+        android:id="@+id/customSidesEditText"
+        style="@style/CustomEditTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/radioGroup"
-        android:entries="@array/custom_sides" />
+        android:layout_marginTop="20dp"
+        android:inputType="number"
+        android:hint="@string/custom_sides_hints" />
 
     <Button
         android:id="@+id/btnRoll"
@@ -42,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/roll_once_button"
-        android:layout_below="@+id/spinner"/>
+        android:layout_below="@+id/customSidesEditText"/>
 
     <Button
         android:id="@+id/btnRollTwice"
