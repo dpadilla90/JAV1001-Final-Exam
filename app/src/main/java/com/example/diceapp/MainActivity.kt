@@ -8,21 +8,27 @@ import com.example.diceapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private val PREFS_NAME = "myPrefs"
-    private val CUSTOM_VALUES_KEY = "customValues"
+    private val RADIO_SELECTED_KEY = "radioSelected"
+    private val SPINNER_SELECTED_KEY = "spinnerSelected"
+    private val RESULT_TEXT_KEY = "resultText"
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
         // Setup the toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.title = "Dice Rolling App"
 
-
         val preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val customValues = preferences.getString(CUSTOM_VALUES_KEY, "") ?: ""
+        val radioSelected = preferences.getInt(RADIO_SELECTED_KEY, R.id.radio4)
+        binding.radioGroup.check(radioSelected)
+        binding.spinner.setSelection(preferences.getInt(SPINNER_SELECTED_KEY, 0))
+        binding.tvResult.text = preferences.getString(RESULT_TEXT_KEY, "")
 
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             binding.spinner.isEnabled = checkedId == R.id.radioCustom
@@ -32,7 +38,6 @@ class MainActivity : AppCompatActivity() {
             rollDice { maxValue -> ((Math.random() * maxValue).toInt() + 1).toString() }
         }
 
-
         binding.btnRollTwice.setOnClickListener {
             rollDice { maxValue ->
                 val randomVal1 = (Math.random() * maxValue).toInt() + 1
@@ -41,8 +46,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
 
     private fun rollDice(roll: (Int) -> String) {
         val selectedId = binding.radioGroup.checkedRadioButtonId
@@ -58,11 +61,14 @@ class MainActivity : AppCompatActivity() {
         }
         binding.tvResult.text = "Result: ${roll(maxValue)}"
     }
+
     override fun onPause() {
         super.onPause()
         val preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val customValues = binding.spinner.selectedItem.toString()
-        preferences.edit().putString(CUSTOM_VALUES_KEY, customValues).apply()
+        preferences.edit()
+            .putInt(RADIO_SELECTED_KEY, binding.radioGroup.checkedRadioButtonId)
+            .putInt(SPINNER_SELECTED_KEY, binding.spinner.selectedItemPosition)
+            .putString(RESULT_TEXT_KEY, binding.tvResult.text.toString())
+            .apply()
     }
-
 }
