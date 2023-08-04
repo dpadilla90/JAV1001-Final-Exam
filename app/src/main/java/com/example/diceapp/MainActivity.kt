@@ -9,6 +9,8 @@ import com.example.diceapp.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private val PREFS_NAME = "myPrefs"
     private val CUSTOM_VALUES_KEY = "customValues"
+    private val SELECTED_RADIO_KEY = "selectedRadio"
+    private val SCORES_KEY = "scores"
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +25,10 @@ class MainActivity : AppCompatActivity() {
 
         val preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val customValues = preferences.getString(CUSTOM_VALUES_KEY, "") ?: ""
+        val selectedRadio = preferences.getInt(SELECTED_RADIO_KEY, R.id.radio6)
+        val scores = preferences.getString(SCORES_KEY, "Result: ")
+        binding.radioGroup.check(selectedRadio)
+        binding.tvResult.text = scores
         binding.customSidesEditText.setText(customValues)
 
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -54,14 +60,23 @@ class MainActivity : AppCompatActivity() {
             R.id.radioCustom -> binding.customSidesEditText.text.toString().toIntOrNull() ?: 0
             else -> 0
         }
-        binding.tvResult.text = "Result: ${roll(maxValue)}"
+        val result = "Result: ${roll(maxValue)}"
+        binding.tvResult.text = result
+        val preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        preferences.edit().putString(SCORES_KEY, result).apply()
     }
 
     override fun onPause() {
         super.onPause()
         val preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val customValues = binding.customSidesEditText.text.toString()
-        preferences.edit().putString(CUSTOM_VALUES_KEY, customValues).apply()
-    }
-}
+        val selectedRadio = binding.radioGroup.checkedRadioButtonId
 
+        preferences.edit().apply {
+            putString(CUSTOM_VALUES_KEY, customValues)
+            putInt(SELECTED_RADIO_KEY, selectedRadio)
+            apply()
+        }
+    }
+
+}
