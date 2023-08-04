@@ -10,24 +10,26 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        android:theme="@style/ToolbarTheme" />
+        android:theme="@style/AppToolbarStyle" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
-        <RadioButton android:id="@+id/radio4" android:text="@string/radio_4" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-        <RadioButton android:id="@+id/radio6" android:text="@string/radio_6" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-        <RadioButton android:id="@+id/radio8" android:text="@string/radio_8" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-        <RadioButton android:id="@+id/radio10" android:text="@string/radio_10" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-        <RadioButton android:id="@+id/radio12" android:text="@string/radio_12" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-        <RadioButton android:id="@+id/radio20" android:text="@string/radio_20" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-        <RadioButton android:id="@+id/radioCustom" android:text="@string/radio_custom" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        android:layout_marginTop="60dp">
+        <RadioButton android:id="@+id/radio4" style="@style/CustomRadioButtonStyle" android:text="@string/radio_4" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <RadioButton android:id="@+id/radio6" style="@style/CustomRadioButtonStyle" android:text="@string/radio_6" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <RadioButton android:id="@+id/radio8" style="@style/CustomRadioButtonStyle" android:text="@string/radio_8" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <RadioButton android:id="@+id/radio10" style="@style/CustomRadioButtonStyle" android:text="@string/radio_10" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <RadioButton android:id="@+id/radio12" style="@style/CustomRadioButtonStyle" android:text="@string/radio_12" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <RadioButton android:id="@+id/radio20" style="@style/CustomRadioButtonStyle" android:text="@string/radio_20" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <RadioButton android:id="@+id/radioCustom" style="@style/CustomRadioButtonStyle" android:text="@string/radio_custom" android:layout_width="wrap_content" android:layout_height="wrap_content" />
     </RadioGroup>
 
     <Spinner
         android:id="@+id/spinner"
+        style="@style/CustomSpinnerStyle"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/radioGroup"
@@ -35,6 +37,8 @@
 
     <Button
         android:id="@+id/btnRoll"
+        android:layout_marginTop="20dp"
+        style="@style/AppButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/roll_once_button"
@@ -42,6 +46,8 @@
 
     <Button
         android:id="@+id/btnRollTwice"
+        android:layout_marginTop="20dp"
+        style="@style/AppButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/roll_twice_button"
@@ -50,6 +56,8 @@
 
     <TextView
         android:id="@+id/tvResult"
+        android:layout_marginTop="20dp"
+        style="@style/CustomTextViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnRollTwice"
